@@ -20,16 +20,15 @@ function errorinInput(errorMessage) {
 
 const FirstStep = forwardRef((props, ref) => {
   const dispatch = useDispatch();
-  const hostedPlaceInfo = props.editingPlaceInfo;
 
   useEffect(() => {
-    if (hostedPlaceInfo) {
-      setTitle(hostedPlaceInfo.title);
-      setAddress(hostedPlaceInfo.address);
-      setDescription(hostedPlaceInfo.description);
-      setCategory(hostedPlaceInfo.category);
+    if (props.editingPlaceInfo) {
+      setTitle(props.editingPlaceInfo.title);
+      setAddress(props.editingPlaceInfo.address);
+      setDescription(props.editingPlaceInfo.description);
+      setCategory(props.editingPlaceInfo.category);
     }
-  }, []);
+  }, [props.editingPlaceInfo]);
 
   const [category, setCategory] = useState("");
 
@@ -90,6 +89,7 @@ const FirstStep = forwardRef((props, ref) => {
           select={category}
           onChange={(event) => setCategory(event.target.value)}
           className="w-full h-10 rounded-2xl bg-white pl-4 border-gray-200">
+          <option value="">Select</option>
           <option value="beachview">Beach View</option>
           <option value="amazingpool">Amazing Pool</option>
           <option value="apartment">Apartment</option>

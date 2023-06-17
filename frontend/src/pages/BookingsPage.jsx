@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ReviewDialogBox from "../components/ReviewDialogBox";
@@ -8,12 +8,13 @@ const BookingsPage = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const { allBookings } = useSelector((state) => state.booking);
-  const userId = user._id;
 
   useEffect(() => {
-    dispatch(getAllbookingAsync(userId));
+    if (user) {
+      dispatch(getAllbookingAsync(user._id));
+    }
     // eslint-disable-next-line
-  }, []);
+  }, [user]);
 
   const canReview = (date) => {
     if (new Date(date).getTime() < new Date().getTime()) {

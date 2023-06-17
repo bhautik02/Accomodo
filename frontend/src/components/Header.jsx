@@ -20,8 +20,8 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { SiGooglehome } from "react-icons/si";
 
-const pages = ["HostPlace", "Bookings", "Reservations"];
-const settings = ["Profile", "Logout"];
+const pages = ["HostPlace", "Bookings", "Reservations", "Profile"];
+const settings = ["Login", "Logout"];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -103,32 +103,18 @@ function Header() {
                 display: { xs: "block", md: "none" },
               }}>
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
+                <div key={Math.random()}>
+                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page}</Typography>
+                  </MenuItem>
+                </div>
               ))}
             </Menu>
           </Box>
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}>
-            LOGO
-          </Typography>
+
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Link to={`/${page.toLowerCase()}`}>
+              <Link to={`/${page.toLowerCase()}`} key={page}>
                 <Button
                   key={page}
                   onClick={handleCloseNavMenu}
@@ -147,11 +133,22 @@ function Header() {
               </Link>
             ))}
           </Box>
-
+          {user && (
+            <Typography
+              variant="body2"
+              noWrap
+              component="div"
+              sx={{ textAlign: "center", margin: "10px", fontSize: "16px" }}>
+              {user.name.split(" ")[0]}
+            </Typography>
+          )}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar
+                  alt=""
+                  src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
+                />
               </IconButton>
             </Tooltip>
             <Menu
@@ -171,7 +168,7 @@ function Header() {
               onClose={handleCloseUserMenu}>
               {settings.map((setting) => (
                 <Link to={`${setting.toLowerCase()}`} key={setting}>
-                  <MenuItem onClick={handleCloseUserMenu}>
+                  <MenuItem onClick={handleCloseUserMenu} key={Math.random()}>
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 </Link>

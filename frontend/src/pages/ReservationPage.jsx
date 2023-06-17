@@ -6,14 +6,13 @@ import { getAllHostedPlacesByUserAsync } from "../store/review";
 const ReservationPages = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
-  const hostedData = useSelector((state) => state.place.yourHostedPlaces);
-
-  const userId = user?._id;
+  const hostedData = useSelector((state) => state.review.yourHostedPlaces);
 
   useEffect(() => {
-    dispatch(getAllHostedPlacesByUserAsync(userId));
-    // eslint-disable-next-line
-  }, [getAllHostedPlacesByUserAsync]);
+    if (user) {
+      dispatch(getAllHostedPlacesByUserAsync(user._id));
+    } // eslint-disable-next-line
+  }, [user]);
 
   return (
     <>
@@ -56,7 +55,7 @@ const ReservationPages = () => {
         <div className="flex  justify-center m-3 ">
           <div className="flex w-1/2 h-3/4 justify-center items-center">
             <h1 className="absolute -mt-96">
-              You not Hosted any Place, Start Hosting...
+              You not have any Reservation Place, Start Hosting...
             </h1>
             <img
               src="https://img.freepik.com/free-vector/no-data-concept-illustration_114360-536.jpg?w=2000"

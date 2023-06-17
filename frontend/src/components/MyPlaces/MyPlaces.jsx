@@ -28,12 +28,10 @@ const MyPlaces = (props) => {
   const hostedData = useSelector((state) => state.addPlace.yourHostedPlaces);
   const dispatch = useDispatch();
 
-  const userId = user._id;
+  // const userId = user?._id;
 
   const [open, setOpen] = useState(false);
   const [editingPlaceInfo, setEditingPlaceInfo] = useState();
-
-  console.log(".............MY PLACES...................");
 
   const handleOpen = () => {
     setEditingPlaceInfo(null);
@@ -46,9 +44,10 @@ const MyPlaces = (props) => {
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    dispatch(getAllHostedPlacesByUserAsync(userId));
-    // eslint-disable-next-line
-  }, [getAllHostedPlacesByUserAsync]);
+    if (user) {
+      dispatch(getAllHostedPlacesByUserAsync(user._id));
+    } // eslint-disable-next-line
+  }, [user]);
 
   const setClose = () => {
     setOpen(false);
@@ -120,7 +119,7 @@ const MyPlaces = (props) => {
         <div className="pt-10">
           <div className="mx-auto md:px-10 sm:px-2 px-4 xsm:ml-20px ">
             <div className=" grid  grid-cols-1  sm:grid-cols-2  md:grid-cols-3  lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5 gap-8 ">
-              {hostedData.length > 0 &&
+              {hostedData &&
                 hostedData.map((place) => {
                   return (
                     <div key={place?._id}>

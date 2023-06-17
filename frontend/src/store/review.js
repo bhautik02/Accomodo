@@ -31,6 +31,11 @@ export const getAllHostedPlacesByUserAsync = createAsyncThunk(
     try {
       const response = await axios.get(`place/hostPlace/${userId}`);
       const getAllHostedPlacesByUser = response.data.hostedPlace;
+
+      console.log(
+        "getAllHostedPlacesByUser--------------->\n",
+        getAllHostedPlacesByUser
+      );
       return getAllHostedPlacesByUser;
     } catch (error) {
       toast.error(error.response.data.message);
@@ -65,6 +70,8 @@ const reviewSlice = createSlice({
       })
       .addCase(getAllHostedPlacesByUserAsync.fulfilled, (state, action) => {
         state.loading = true;
+
+        console.log("------ state.yourHostedPlaces ------", action.payload);
         state.yourHostedPlaces = action.payload;
       })
       .addCase(getAllHostedPlacesByUserAsync.rejected, (state, action) => {

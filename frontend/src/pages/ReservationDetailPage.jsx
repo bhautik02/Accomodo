@@ -130,7 +130,7 @@ export default function ReservationDetailPage() {
             </TableContainer>
             <div className="flex -mt-10 mb-4 justify-center">
               <Link
-                to={"/account/reservations"}
+                to={"/reservations"}
                 className="flex gap-1 py-2 px-6 bg-primary rounded-full text-white justify-center">
                 go to all reservations
               </Link>

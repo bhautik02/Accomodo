@@ -10,7 +10,6 @@ import ShowAmenities from "../components/ShowAmenities";
 import CheckInSvg from "../utils/svg/CheckInSvg";
 import CheckOutSvg from "../utils/svg/CheckOutSvg";
 import BatchSvg from "../utils/svg/BatchSvg";
-import StarSvg from "../utils/svg/StarSvg";
 import { getPlaceAsync, placeActions } from "../store/place";
 
 // import { getPlace } from "./../api";

@@ -6,6 +6,7 @@ import MyDatePicker from "./DatePicker";
 import { bookPlaceAsync } from "../store/booking";
 import datesBetween from "dates-between";
 import axios from "axios";
+import { red } from "@mui/material/colors";
 
 export default function BookingWidget({ place }) {
   const [checkIn, setCheckIn] = useState("");
@@ -13,9 +14,10 @@ export default function BookingWidget({ place }) {
   const [numberOfGuests, setNumberOfGuests] = useState(1);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [redirect, setRedirect] = useState(false);
 
   const user = useSelector((state) => state.user.user);
-  const bookingData = useSelector((state) => state.booking.newBooking);
+  // const bookingData = useSelector((state) => state.booking.newBooking);
 
   const dispatch = useDispatch();
 
@@ -107,6 +109,7 @@ export default function BookingWidget({ place }) {
             };
 
             dispatch(bookPlaceAsync(formData));
+            setRedirect(true);
           }
         } catch (error) {
           console.log(error);
@@ -132,9 +135,9 @@ export default function BookingWidget({ place }) {
     }
   }
 
-  // useEffect(() => {
-  //   <Navigate to={"/payment"} />;
-  // }, [bookingData]);
+  if (redirect) {
+    <Navigate to={"/success"} />;
+  }
 
   return (
     <div className="bg-white shadow p-4 rounded-2xl">

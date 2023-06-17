@@ -5,7 +5,6 @@ import {
   hostPlaceAsync,
   updateHostedPlaceAsync,
 } from "../../store/addPlace";
-// import { hostedPlaceActions } from "../../store/place";
 
 function preInput(label) {
   return (
@@ -15,18 +14,16 @@ function preInput(label) {
   );
 }
 
-const ThirdStep = forwardRef((props, ref, editingPlaceInfo) => {
-  const hostedPlaceInfo = props.editingPlaceInfo;
-
+const ThirdStep = forwardRef((props, ref) => {
   useEffect(() => {
-    if (hostedPlaceInfo) {
-      console.log("bed", hostedPlaceInfo.noOfBedrooms);
-      setNumberOfBedrooms(hostedPlaceInfo.noOfBedrooms);
-      setNumberOfBathrooms(hostedPlaceInfo.noOfBathrooms);
-      setNumberOfGuest(hostedPlaceInfo.maxGuest);
-      setPrice(hostedPlaceInfo.price);
-      setCheckInTime(hostedPlaceInfo.checkIn);
-      setCheckOutTime(hostedPlaceInfo.checkOut);
+    if (props.editingPlaceInfo) {
+      console.log("bed", props.editingPlaceInfo.noOfBedrooms);
+      setNumberOfBedrooms(props.editingPlaceInfo.noOfBedrooms);
+      setNumberOfBathrooms(props.editingPlaceInfo.noOfBathrooms);
+      setNumberOfGuest(props.editingPlaceInfo.maxGuest);
+      setPrice(props.editingPlaceInfo.price);
+      setCheckInTime(props.editingPlaceInfo.checkIn);
+      setCheckOutTime(props.editingPlaceInfo.checkOut);
     }
   }, []);
 
@@ -61,13 +58,13 @@ const ThirdStep = forwardRef((props, ref, editingPlaceInfo) => {
   useEffect(() => {
     const userId = user?._id;
     const formdata = { ...addPlace, userId };
-    if (ready && !hostedPlaceInfo) {
+    if (ready && !props.editingPlaceInfo) {
       dispatch(hostPlaceAsync(formdata));
       dispatch(addPlaceActions.clearPlaceData());
     }
-    const placeId = hostedPlaceInfo?._id;
+    const placeId = props.editingPlaceInfo?._id;
     const updatedFormData = { ...addPlace, placeId };
-    if (ready && hostedPlaceInfo) {
+    if (ready && props.editingPlaceInfo) {
       dispatch(updateHostedPlaceAsync(updatedFormData));
       dispatch(addPlaceActions.clearPlaceData());
     }

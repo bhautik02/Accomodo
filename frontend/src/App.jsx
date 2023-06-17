@@ -70,13 +70,18 @@ function App() {
           <Route path="/hostplace" element={<MyPlaces />} />
           <Route path="/reservations" element={<ReservationPages />} />
           <Route path="/bookings" element={<BookingsPage />} />
-
+          <Route path="/profile" element={<MyAccount />} />
+          <Route path="/bookings" element={<BookingsPage />} />
+          <Route path="/places/:id" element={<PlacePage />}></Route>
+          <Route
+            path="/reservation/:id"
+            element={<ReservationDetailPage />}></Route>
           {/* //////////////////////////////////////////////// */}
           {/* <Route path="/account/myAccount" element={<MyAccount />} />
           <Route path="/account/liked" element={<MyAccount />} />
           <Route path="/account/:param" element={<AccountPage />}></Route>
           <Route path="/account/bookings/:id" element={<BookingPage />}></Route>
-          <Route path="/places/:id" element={<PlacePage />}></Route>
+          
           <Route
             path="/reservation/:id"
             element={<ReservationDetailPage />}></Route> */}

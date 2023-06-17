@@ -103,3 +103,16 @@ export default function ReviewDialogBox({ bookingData }) {
     </div>
   );
 }
+{
+  /* <button
+onClick={handleClose}
+className="bg-grey rounded-lg px-4 py-2">
+Cancel
+</button>
+<button
+onClick={handleClose}
+type="submit"
+className="bg-primary text-white rounded-lg px-4 py-2 ">
+Submit
+</button> */
+}

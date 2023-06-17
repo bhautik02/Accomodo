@@ -7,5 +7,6 @@ router.route("/signup").post(userController.signupUser);
 router.route("/login").post(userController.loginUser);
 router.route("/logout").get(userController.logoutUser);
 router.route("/profile").get(userController.profile);
+router.route("/updateprofile/:id").patch(userController.updateUserDetails);
 
 module.exports = router;

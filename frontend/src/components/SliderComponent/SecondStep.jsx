@@ -45,21 +45,19 @@ const SecondStep = forwardRef((props, ref) => {
   const [remove, setRemove] = useState(false);
   const [hoverIndex, setHoverIndex] = useState();
 
-  const hostedPlaceInfo = props.editingPlaceInfo;
-
   useEffect(() => {
-    if (hostedPlaceInfo) {
-      const perks = hostedPlaceInfo.perks;
+    if (props.editingPlaceInfo) {
+      const perks = props.editingPlaceInfo.perks;
 
       let obj = {};
       perks.map((perk) => {
         obj[perk] = true;
       });
-      setImages(hostedPlaceInfo.photo);
+      setImages(props.editingPlaceInfo.photo);
       setCheckData({ ...obj });
       console.log("----->", obj);
     }
-  }, [hostedPlaceInfo]);
+  }, [props.editingPlaceInfo]);
 
   const uploadPhoto = (event) => {
     setLoading((prev) => !prev);
@@ -109,11 +107,8 @@ const SecondStep = forwardRef((props, ref) => {
       photo: images,
     };
 
-    // console.log(secondSlideInput);
     dispatch(addPlaceActions.addPlaceData(secondSlideInput));
   };
-
-  useEffect(() => {}, [loading]);
 
   function handleCbClick(ev) {
     const { checked, name } = ev.target;
@@ -215,8 +210,8 @@ const SecondStep = forwardRef((props, ref) => {
             </>
           )}
         </label>
-        {hostedPlaceInfo &&
-          hostedPlaceInfo.photo &&
+        {props.editingPlaceInfo &&
+          props.editingPlaceInfo.photo &&
           images.map((image, index) => {
             // console.log("images", hostedPlaceInfo.photo);
             return (
@@ -255,7 +250,7 @@ const SecondStep = forwardRef((props, ref) => {
               </div>
             );
           })}
-        {!hostedPlaceInfo &&
+        {!props.editingPlaceInfo &&
           uploading === "Done" &&
           images.map((image) => {
             return (

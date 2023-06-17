@@ -81,9 +81,29 @@ const profile = CatchAsync(async (req, res, next) => {
   });
 });
 
+const updateUserDetails = CatchAsync(async (req, res, next) => {
+  const { address, gender, aboutMe, phone, profile } = req.body;
+  const updatedUser = await User.findByIdAndUpdate(req.params, id, {
+    address,
+    gender,
+    aboutMe,
+    phone,
+    profile,
+  });
+
+  if (!updatedUser) {
+    return next(new AppError("user not Exist!", 400));
+  }
+  res.status(200).json({
+    status: "success",
+    updatedUser,
+  });
+});
+
 module.exports = {
   signupUser,
   loginUser,
   logoutUser,
   profile,
+  updateUserDetails,
 };
