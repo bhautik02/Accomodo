@@ -33,6 +33,8 @@ const MyPlaces = (props) => {
   const [open, setOpen] = useState(false);
   const [editingPlaceInfo, setEditingPlaceInfo] = useState();
 
+  console.log(".............MY PLACES...................");
+
   const handleOpen = () => {
     setEditingPlaceInfo(null);
     setOpen(true);
@@ -53,7 +55,7 @@ const MyPlaces = (props) => {
   };
 
   const deletePlaceHandler = (placeID) => {
-    console.log("c;iceksf", placeID);
+    // console.log("c;iceksf", placeID);
     dispatch(deletePlaceAsync(placeID));
   };
 
@@ -121,7 +123,7 @@ const MyPlaces = (props) => {
               {hostedData.length > 0 &&
                 hostedData.map((place) => {
                   return (
-                    <div key={place._id}>
+                    <div key={place?._id}>
                       <Link
                         className="col-span-1 cursor-pointer group"
                         onClick={editHandleOpen.bind(null, place)}>
@@ -129,27 +131,27 @@ const MyPlaces = (props) => {
                           <div className="aspect-square w-full relative overflow-hidden rounded-xl ">
                             <img
                               className=" object-cover h-full w-full group-hover:scale-110 transition "
-                              src={place.photo[0]}
+                              src={place?.photo[0]}
                               alt="Listing"
                             />
                             <div className="absolute top-3 right-3"></div>
-                          </div>{" "}
+                          </div>
                         </div>
                       </Link>
                       <div className="mt-1">
                         <div className="font-semibold text-lg">
-                          {place.address}
+                          {place?.address}
                         </div>
                         <div className="font-light text-neutral-500">Beach</div>
                         <div className="flex flex-row items-center gap-1">
-                          <div className="font-semibold">{place.price} ₹</div>
+                          <div className="font-semibold">{place?.price} ₹</div>
                           <div className="font-light">night</div>
                         </div>
                         <div className="flex justify-start mt-2">
                           {console.log("idddddd", place)}
                           <button
                             className="bg-primary text-white px-4 py-1 rounded-md"
-                            onClick={deletePlaceHandler.bind(null, place._id)}>
+                            onClick={deletePlaceHandler.bind(null, place?._id)}>
                             Delete
                           </button>
                         </div>

@@ -16,11 +16,12 @@ import PlacePage from "./pages/PlacePage";
 import PagenotFound from "./pages/PagenotFound";
 import BookingsPage from "./pages/BookingsPage";
 import BookingPage from "./pages/ReservationDetailPage";
-import ReservationPage from "./pages/ReservationPage";
+
 import MyAccount from "./components/MyAccount";
 import ReservationDetailPage from "./pages/ReservationDetailPage";
-import MyPlaces from "./pages/ReservationPage";
 import { GoogleApiWrapper } from "google-maps-react";
+import MyPlaces from "./components/MyPlaces/MyPlaces";
+import ReservationPages from "./pages/ReservationPage";
 
 axios.defaults.baseURL = "http://localhost:5000/api/v1/";
 const URL = "http://localhost:5000/api/v1/users/profile";
@@ -56,7 +57,7 @@ function App() {
           {/* <Route index path="/home" element={<HomePage />}></Route> */}
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/register" element={<RegisterPage />}></Route>
-          <Route
+          {/* <Route
             path="/account"
             element={
               user ? (
@@ -64,18 +65,21 @@ function App() {
               ) : (
                 <Navigate replace to="/login" />
               )
-            }></Route>
+            }></Route> */}
+          {/* ///////////////////////////////////////// */}
+          <Route path="/hostplace" element={<MyPlaces />} />
+          <Route path="/reservations" element={<ReservationPages />} />
+          <Route path="/bookings" element={<BookingsPage />} />
+
+          {/* //////////////////////////////////////////////// */}
           {/* <Route path="/account/myAccount" element={<MyAccount />} />
-          <Route path="/account/reservations" element={<ReservationPage />} />
-          <Route path="/account/bookings" element={<BookingsPage />} />
           <Route path="/account/liked" element={<MyAccount />} />
-          <Route path="/account/places" element={<MyPlaces />} /> */}
           <Route path="/account/:param" element={<AccountPage />}></Route>
           <Route path="/account/bookings/:id" element={<BookingPage />}></Route>
           <Route path="/places/:id" element={<PlacePage />}></Route>
           <Route
             path="/reservation/:id"
-            element={<ReservationDetailPage />}></Route>
+            element={<ReservationDetailPage />}></Route> */}
           {/* /account/bookings/${bookingData._id} */}
           {/* <Route path="/account/:param/:action" element={<AccountPage />}></Route> */}
           {/* <Route

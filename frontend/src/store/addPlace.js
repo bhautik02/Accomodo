@@ -19,6 +19,7 @@ export const hostPlaceAsync = createAsyncThunk(
         perks,
         photo,
         userId,
+        category,
       } = formdata;
 
       const response = await axios.post(`place/hostPlace/${userId}`, {
@@ -33,6 +34,7 @@ export const hostPlaceAsync = createAsyncThunk(
         price,
         perks,
         photo,
+        category,
       });
       console.log("res", response);
       const hostedPlace = response.data.newHostedPlace;
@@ -81,12 +83,10 @@ export const deletePlaceAsync = createAsyncThunk(
   "addPlace/deletePlace",
   async (placeId) => {
     try {
-      const response = await axios.patch(`place/deletePlace/${placeId}`, {
-        isdeleted: true,
-      });
-      const deletedHostedPlace = response.data.deletedHostedPlace;
+      const response = await axios.patch(`place/deletePlace/${placeId}`);
+      // const deletedHostedPlace = response.data.deletedHostedPlace;
       toast.success("Hosted Place deleted Successfully.");
-      return deletedHostedPlace;
+      return placeId;
     } catch (error) {
       return error.response.data.message;
     }
@@ -160,8 +160,8 @@ const addPlaceSlice = createSlice({
       .addCase(deletePlaceAsync.fulfilled, (state, action) => {
         state.loading = false;
 
-        state.yourHostedPlaces = state.yourHostedPlaces.map((place) => {
-          if (place._id !== action.payload._id) return place;
+        state.yourHostedPlaces = state.yourHostedPlaces.filter((place) => {
+          if (place._id !== action.payload) return place;
         });
       })
       .addCase(deletePlaceAsync.rejected, (state, action) => {

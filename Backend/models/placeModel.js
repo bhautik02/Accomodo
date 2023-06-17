@@ -6,6 +6,10 @@ const placeSchema = mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       ref: "User",
     },
+    category: {
+      type: String,
+      required: true,
+    },
     title: {
       type: String,
       required: true,

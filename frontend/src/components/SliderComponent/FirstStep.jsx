@@ -27,8 +27,11 @@ const FirstStep = forwardRef((props, ref) => {
       setTitle(hostedPlaceInfo.title);
       setAddress(hostedPlaceInfo.address);
       setDescription(hostedPlaceInfo.description);
+      setCategory(hostedPlaceInfo.category);
     }
   }, []);
+
+  const [category, setCategory] = useState("");
 
   const [title, setTitle] = useState("");
   const [titleIsTouched, setTitleIsTouched] = useState(false);
@@ -63,6 +66,7 @@ const FirstStep = forwardRef((props, ref) => {
       title,
       address,
       description,
+      category,
     };
     console.log(firstSlideInput);
     dispatch(addPlaceActions.addPlaceData(firstSlideInput));
@@ -77,6 +81,30 @@ const FirstStep = forwardRef((props, ref) => {
 
   return (
     <form className="p-4" onSubmit={onclickHandler}>
+      {preInput("Select a category")}
+      <div className="w-full mt-4">
+        <select
+          id="category"
+          required
+          name="category"
+          select={category}
+          onChange={(event) => setCategory(event.target.value)}
+          className="w-full h-10 rounded-2xl bg-white pl-4 border-gray-200">
+          <option value="beachview">Beach View</option>
+          <option value="amazingpool">Amazing Pool</option>
+          <option value="apartment">Apartment</option>
+          <option value="campingsite">Camping Site</option>
+          <option value="cabin">Cabin</option>
+          <option value="historicalhomes">Historical Homes</option>
+          <option value="treehouse">Tree House</option>
+          <option value="mansions">Mansions</option>
+          <option value="housewithparking">House With Parking</option>
+          <option value="domehouse">Dome House</option>
+          <option value="boathouse">Boat House</option>
+          <option value="highrisetower">Highrise Tower</option>
+          <option value="chefkitchen">Chef's Kitchen</option>
+        </select>
+      </div>
       {preInput("Title")}
       <input
         type="text"
@@ -87,7 +115,6 @@ const FirstStep = forwardRef((props, ref) => {
         placeholder="Title for your place."
       />
       {titleInputIsInvalid && errorinInput("Title must not be empty!")}
-
       {preInput("Address")}
       <input
         type="text"
@@ -98,7 +125,6 @@ const FirstStep = forwardRef((props, ref) => {
         placeholder="Address to this place"
       />
       {addressInputIsInvalid && errorinInput("Address must not be empty!")}
-
       {preInput("Description")}
       <textarea
         value={description}
@@ -112,7 +138,6 @@ const FirstStep = forwardRef((props, ref) => {
       />
       {descriptionInputIsInvalid &&
         errorinInput("Description must not be empty!")}
-
       <button style={{ display: "none" }} type="submit" ref={ref}></button>
     </form>
   );

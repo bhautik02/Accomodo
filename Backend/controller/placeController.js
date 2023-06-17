@@ -40,7 +40,14 @@ const getYourHostedPlace = CatchAsync(async (req, res, next) => {
 });
 
 const getAllHostedplaces = CatchAsync(async (req, res, next) => {
-  const hostedPlace = await Place.find({ isDeleted: false }).select("-__v");
+  console.log("nbdf", req.body.category);
+  let category = req.body.category;
+
+  let obj = category ? { isDeleted: false, category } : { isDeleted: false };
+  // if (category) {
+
+  // }
+  const hostedPlace = await Place.find(obj).select("-__v");
 
   if (!hostedPlace) {
     return next(new AppError("Places not found!", 404));
@@ -66,6 +73,7 @@ const hostPlace = CatchAsync(async (req, res, next) => {
     maxGuest,
     noOfBedrooms,
     noOfBathrooms,
+    category,
   } = req.body;
   const ownerId = req.params.id;
   const newHostedPlace = await Place.create({
@@ -80,6 +88,7 @@ const hostPlace = CatchAsync(async (req, res, next) => {
     maxGuest,
     noOfBedrooms,
     noOfBathrooms,
+    category,
     owner: ownerId,
     numberOfReview: 0,
     totalRatings: 0,
@@ -161,10 +170,7 @@ const deleteHostedData = CatchAsync(async (req, res, next) => {
     return next(new AppError("Place not deleted!", 404));
   }
 
-  res.status(200).json({
-    status: "success",
-    deletedHostedPlace,
-  });
+  res.status(204).json(null);
 });
 
 module.exports = {

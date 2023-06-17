@@ -3,9 +3,9 @@ import axios from "axios";
 
 export const getAllPlacesAsync = createAsyncThunk(
   "place/getAllPlaces",
-  async () => {
+  async (category) => {
     try {
-      const response = await axios.get(`place/hostPlaces`);
+      const response = await axios.post(`place/hostPlaces`, { category });
       const allPlaces = response.data.hostedPlace;
       return allPlaces;
     } catch (error) {

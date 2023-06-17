@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAllHostedPlacesByUserAsync } from "../store/review";
 
-const MyPlaces = () => {
+const ReservationPages = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const hostedData = useSelector((state) => state.place.yourHostedPlaces);
 
-  const userId = user._id;
+  const userId = user?._id;
 
   useEffect(() => {
     dispatch(getAllHostedPlacesByUserAsync(userId));
@@ -70,4 +70,4 @@ const MyPlaces = () => {
   );
 };
 
-export default MyPlaces;
+export default ReservationPages;
