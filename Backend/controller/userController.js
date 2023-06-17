@@ -83,7 +83,8 @@ const profile = CatchAsync(async (req, res, next) => {
 
 const updateUserDetails = CatchAsync(async (req, res, next) => {
   const { address, gender, aboutMe, phone, profile } = req.body;
-  const updatedUser = await User.findByIdAndUpdate(req.params, id, {
+  console.log(aboutMe);
+  const updatedUser = await User.findByIdAndUpdate(req.params.id, {
     address,
     gender,
     aboutMe,
